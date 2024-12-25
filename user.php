@@ -8,10 +8,13 @@
                 <div class="box">
 
                     <div class="box-header">
-                        VOCABULARY BANK
+                        User
                     </div>
 
                     <div class="box-body">
+                        
+                        <a href="tambah-pengguna.php"><i class="fa fa-plus"></i> add user</a>
+
 
                         <form action="">
                             <div class="input-group">
@@ -20,12 +23,15 @@
                             </div>
                         </form>
 
-                        <table class="table-vocab">
+
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>vocabularies</th>
-                                    <th>meaning</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Level</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
 
@@ -35,17 +41,22 @@
 
                                     $where = " WHERE 1=1 ";
                                     if(isset($_GET['key'])){
-                                        $where .= " AND word LIKE '%".addslashes($_GET['key'])."%' ";
+                                        $where .= " AND nama LIKE '%".addslashes($_GET['key'])."%' ";
                                     }
 
-                                    $words = mysqli_query($conn, "SELECT * FROM tb_vocabulary $where ORDER BY id_vocabulary DESC");
-                                    if(mysqli_num_rows($words) > 0){
-                                        while($vocab = mysqli_fetch_array($words)){
+                                    $user = mysqli_query($conn, "SELECT * FROM tb_admin $where ORDER BY id_user DESC");
+                                    if(mysqli_num_rows($user) > 0){
+                                        while($pengguna = mysqli_fetch_array($user)){
                                 ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $vocab['word']?></td>
-                                    <td><?= $vocab['meaning']?></td>
+                                    <td><?= $pengguna['nama']?></td>
+                                    <td><?= $pengguna['username']?></td>
+                                    <td><?= $pengguna['user']?></td>
+                                    <td>
+                                        <a href="edit-pengguna.php?id=<?= $pengguna['id_user'] ?>">edit</a> |
+                                        <a href="hapus.php?idpengguna=<?= $pengguna['id_user'] ?>" onclick="return confirm('Are you sure want to delete this data?')">delete</a>
+                                    </td>
                                 </tr>
 
                             <?php }}else{ ?>

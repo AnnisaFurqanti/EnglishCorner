@@ -5,7 +5,6 @@ $sql = "SELECT * FROM tb_grammar";
 $result = $conn->query($sql);
 ?>
 
-<body class="bg-light"></body>
     <div class="container-grammar">
             <h1 class="grammar-title">English Grammar</h1>
             <?php
